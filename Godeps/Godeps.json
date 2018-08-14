@@ -1,5 +1,5 @@
 {
-	"ImportPath": "bitbucket.es.ad.adp.com/projects/PC/repos/docker-gateway-project",
+	"ImportPath": "cozysystems.net/projects/CloudNative/repos/docker-gateway-project",
 	"GoVersion": "go1.9",
 	"GodepVersion": "v79",
 	"Deps": [

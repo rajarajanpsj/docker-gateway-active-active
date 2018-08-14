@@ -4,9 +4,9 @@ import (
 	"flag"
 	"os"
 	log "github.com/sirupsen/logrus"
-	"bitbucket.es.ad.adp.com/projects/PC/repos/docker-gateway-project/config"
-	"bitbucket.es.ad.adp.com/projects/PC/repos/docker-gateway-project/client"
-	"bitbucket.es.ad.adp.com/projects/PC/repos/docker-gateway-project/process"
+	"cozysystems.net/projects/CloudNative/repos/docker-gateway-project/config"
+	"cozysystems.net/projects/CloudNative/repos/docker-gateway-project/client"
+	"cozysystems.net/projects/CloudNative/repos/docker-gateway-project/process"
 	"io/ioutil"
 	"github.com/BurntSushi/toml"
 )

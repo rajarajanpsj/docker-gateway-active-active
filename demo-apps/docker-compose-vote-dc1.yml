@@ -1,13 +1,13 @@
 version : "2"
 services:
    vote_S1DC1:
-            image: dtr.cdl.es.ad.adp.com/paas/instavote:1.0
+            image: cozysystems.net/cloud/instavote:1.0
             ports:
                  - 80
             labels:
                   - "interlock.hostname=vote.s1.dc1"
-                  - "interlock.domain=paascloud.oneadp.com"
-                  - "interlock.alias_domain.0=vote.s1.dc2.paascloud.oneadp.com"
+                  - "interlock.domain=cloud.cozy.com"
+                  - "interlock.alias_domain.0=vote.s1.dc2.cloud.cozy.com"
                   - "dockergateway.activeactive=true"
                   - "dockergateway.health_check_uri=/"
                   - "dockergateway.health_check_interval=5"
@@ -16,13 +16,13 @@ services:
             restart: always
             
    vote_S2DC1:
-            image: dtr.cdl.es.ad.adp.com/paas/instavote:1.0
+            image: cozysystems.net/cloud/instavote:1.0
             ports:
                  - 80
             labels:
                   - "interlock.hostname=vote.s2.dc1"
-                  - "interlock.domain=paascloud.oneadp.com"
-                  - "interlock.alias_domain.0=vote.s2.dc2.paascloud.oneadp.com"
+                  - "interlock.domain=cloud.cozy.com"
+                  - "interlock.alias_domain.0=vote.s2.dc2.cloud.cozy.com"
                   - "dockergateway.activeactive=true"
                   - "dockergateway.health_check_uri=/"
                   - "dockergateway.health_check_interval=5"

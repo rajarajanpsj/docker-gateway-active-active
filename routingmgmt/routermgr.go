@@ -1,8 +1,8 @@
 package routingmgmt
 
 import (
-	"bitbucket.es.ad.adp.com/projects/PC/repos/docker-gateway-project/config"
-	"bitbucket.es.ad.adp.com/projects/PC/repos/docker-gateway-project/routingmgmt/nginxplus"
+	"cozysystems.net/projects/CloudNative/repos/docker-gateway-project/config"
+	"cozysystems.net/projects/CloudNative/repos/docker-gateway-project/routingmgmt/nginxplus"
 	"github.com/docker/docker/client"
 	log "github.com/sirupsen/logrus"
 )

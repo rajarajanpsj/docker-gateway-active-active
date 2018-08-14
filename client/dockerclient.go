@@ -92,7 +92,7 @@ func GetDockerClient(dockerUrl, tlsCaCert, tlsCert, tlsKey string, allowInsecure
 
 	log.Debugf("docker client: url=%s", dockerUrl)
 
-	defaultHeaders := map[string]string{"User-Agent": "DockerGatewayProcess from PaaS, Container Services" }
+	defaultHeaders := map[string]string{"User-Agent": "DockerGatewayProcess from cloud, Container Services" }
 	c, err := client.NewClient(dockerUrl, apiVersion, httpClient, defaultHeaders)
 	if err != nil {
 		return nil, err

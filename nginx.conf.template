@@ -34,19 +34,19 @@ http {
 }
   upstream default {
         zone default_backend 64k;
-        {{range ls "maersk/docker-gateway/ucp.engineering-cdl.es.paascloud.oneadp.com/interlock/nginxplus/" }}
+        {{range ls "maersk/docker-gateway/ucp.engineering-cdl.es.cloudcloud.oneadp.com/interlock/nginxplus/" }}
              server {{ $d := .Value | parseJSON }} {{$d.hostname}}:{{$d.port}};
         {{end}}
 
     }
 
-{{range ls "maersk/docker-gateway/ucp.engineering-cdl.es.paascloud.oneadp.com/active-active-services" }}
+{{range ls "maersk/docker-gateway/ucp.engineering-cdl.es.cloudcloud.oneadp.com/active-active-services" }}
   upstream {{.Key}} {
         zone {{.Key}}_backend 64k;
-        {{range ls "maersk/docker-gateway/ucp.engineering-cdl.es.paascloud.oneadp.com/interlock/nginxplus/" }}
+        {{range ls "maersk/docker-gateway/ucp.engineering-cdl.es.cloudcloud.oneadp.com/interlock/nginxplus/" }}
              server {{ $d := .Value | parseJSON }} {{$d.hostname}}:{{$d.port}};
         {{end}}
-        {{range ls "maersk/docker-gateway/ucp.nas-cdl.es.ad.adp.com/gatewayrouter/nginxplus/" }}
+        {{range ls "maersk/docker-gateway/cozysystems.net/gatewayrouter/nginxplus/" }}
              server {{ $d := .Value | parseJSON }} {{$d.hostname}}:{{$d.port}} backup;
         {{end}}
   }
@@ -64,7 +64,7 @@ http {
     }
     }
 
-{{range ls "maersk/docker-gateway/ucp.engineering-cdl.es.paascloud.oneadp.com/active-active-services" }}
+{{range ls "maersk/docker-gateway/ucp.engineering-cdl.es.cloudcloud.oneadp.com/active-active-services" }}
   server  {
         listen 80;
         server_name {{.Key}};

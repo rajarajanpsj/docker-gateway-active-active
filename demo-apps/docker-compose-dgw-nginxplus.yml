@@ -1,0 +1,13 @@
+version : "2"
+services:
+   dgw_nginxplus:
+            image: dtr.cdl.es.ad.adp.com/paas/nginx-plus:1.13.4_v1.0
+            entrypoint: nginx
+            command: -g "daemon off;" -c /etc/nginx/nginx.conf
+            environment:
+                       - "constraint:dockergw==true"
+            ports:
+                 - 81:80
+            labels:
+                  - "dockergateway.router.type=nginxplus"
+            restart: always

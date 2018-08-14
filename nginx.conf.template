@@ -1,0 +1,84 @@
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+   match container {
+     # Used for /test.php health check
+     status 200;
+     #header Content-Type = text/html;
+     #body ~ "container";
+}
+  upstream default {
+        zone default_backend 64k;
+        {{range ls "maersk/docker-gateway/ucp.engineering-cdl.es.paascloud.oneadp.com/interlock/nginxplus/" }}
+             server {{ $d := .Value | parseJSON }} {{$d.hostname}}:{{$d.port}};
+        {{end}}
+
+    }
+
+{{range ls "maersk/docker-gateway/ucp.engineering-cdl.es.paascloud.oneadp.com/active-active-services" }}
+  upstream {{.Key}} {
+        zone {{.Key}}_backend 64k;
+        {{range ls "maersk/docker-gateway/ucp.engineering-cdl.es.paascloud.oneadp.com/interlock/nginxplus/" }}
+             server {{ $d := .Value | parseJSON }} {{$d.hostname}}:{{$d.port}};
+        {{end}}
+        {{range ls "maersk/docker-gateway/ucp.nas-cdl.es.ad.adp.com/gatewayrouter/nginxplus/" }}
+             server {{ $d := .Value | parseJSON }} {{$d.hostname}}:{{$d.port}} backup;
+        {{end}}
+  }
+{{end}}
+
+
+    server {
+        listen 80 default_server;
+        underscores_in_headers on;
+        ignore_invalid_headers off;
+
+        location / {
+        proxy_pass http://default;
+        proxy_set_header Host $http_host;
+    }
+    }
+
+{{range ls "maersk/docker-gateway/ucp.engineering-cdl.es.paascloud.oneadp.com/active-active-services" }}
+  server  {
+        listen 80;
+        server_name {{.Key}};
+        underscores_in_headers on;
+        ignore_invalid_headers off;
+
+         location / {
+            proxy_pass http://{{.Key}};
+            proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+			{{ $d := .Value | parseJSON }}
+            health_check uri={{$d.Label_health_check_uri}} interval={{$d.Label_health_check_interval}} fails={{$d.Label_health_check_fails}} passes={{$d.Label_health_check_passes}} match=container;
+         }
+  }
+{{end}}
+
+    include /etc/nginx/conf.d/*.conf;
+}

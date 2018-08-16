@@ -1,14 +1,14 @@
 ListenAddr = ":8080"
-DockerURL = "tcp://ucp.engineering-cdl.es.cloudcloud.oneadp.com:443"
+DockerURL = "tcp://$DOCKER_HOST:443"
 TLSCACert = "C:\\Rajan\\admin-bundle\\ca.pem"
 TLSCert = "C:\\Rajan\\admin-bundle\\cert.pem"
 TLSKey = "C:\\Rajan\\admin-bundle\\key.pem"
-ActiveActiveSrvcsCnslPath = "maersk/docker-gateway/ucp.engineering-cdl.es.cloudcloud.oneadp.com/active-active-services" 
+ActiveActiveSrvcsCnslPath = "maersk/docker-gateway/$DOCKER_HOST/active-active-services" 
 BuddyCluster = "cozysystems.net"
 RemoteGateWayCnslPath = "maersk/docker-gateway/cozysystems.net/gatewayrouter/nginxplus"
 AllowInsecure = false
 PollInterval = "15s"
-ConsulHost = "cdlcldvmg0013.es.ad.adp.com"
+ConsulHost = "$CONSULHOST"
 ConsulPort = 8500
 ConsulTemplate = "C:\\Rajan\\consul-template"
 DefaultHealthChkURI = "/health"

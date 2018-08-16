@@ -6,8 +6,8 @@ services:
                  - 80
             labels:
                   - "interlock.hostname=vote.s1.dc2"
-                  - "interlock.domain=cloudcloud.oneadp.com"
-                  - "interlock.alias_domain.0=vote.s1.dc1.cloudcloud.oneadp.com"
+                  - "interlock.domain=cloudcloud.cozysystems.net"
+                  - "interlock.alias_domain.0=vote.s1.dc1.cloudcloud.cozysystems.net"
                   - "dockergateway.activeactive=true"
                   - "dockergateway.health_check_uri=/"
                   - "dockergateway.health_check_interval=5"
@@ -21,8 +21,8 @@ services:
                  - 80
             labels:
                   - "interlock.hostname=vote.s2.dc2"
-                  - "interlock.domain=cloudcloud.oneadp.com"
-                  - "interlock.alias_domain.0=vote.s2.dc1.cloudcloud.oneadp.com"
+                  - "interlock.domain=cloudcloud.cozysystems.net"
+                  - "interlock.alias_domain.0=vote.s2.dc1.cloudcloud.cozysystems.net"
                   - "dockergateway.activeactive=true"
                   - "dockergateway.health_check_uri=/"
                   - "dockergateway.health_check_interval=5"
